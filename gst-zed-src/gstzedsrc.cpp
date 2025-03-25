@@ -2205,13 +2205,14 @@ static gboolean gst_zedsrc_calculate_caps(GstZedSrc *src) {
 }
 
 static gboolean gst_zedsrc_start(GstBaseSrc *bsrc) {
+GstZedSrc *src = GST_ZED_SRC(bsrc);
+
 #if (ZED_SDK_MAJOR_VERSION != 4 && ZED_SDK_MINOR_VERSION != 2 && ZED_SDK_SUB_VERSION != 2)
-    GST_ELEMENT_ERROR(src, LIBRARY, FAILED, 
+    GST_ELEMENT_ERROR(src, LIBRARY, FAILED,
     ("Wrong ZED SDK version. SDK v4.2.2 required "),
                       (NULL));
 #endif
 
-    GstZedSrc *src = GST_ZED_SRC(bsrc);
     sl::ERROR_CODE ret;
 
     GST_TRACE_OBJECT(src, "gst_zedsrc_calculate_caps");
